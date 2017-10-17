@@ -1,0 +1,1154 @@
+<!doctype html>
+<html>
+<head>
+    <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Formation React js, avec ES6"/>
+    <meta name="keywords"
+          content="formation react, formation reactjs, freelance, flux, redux, es6, props, state, jsx"/>
+    <link rel="canonical" href="http://codox.fr/formation-reactjs-es6"/>
+    <title>Formation react js ES6</title>
+    <link href="https://google.com/+JeanBaptisteCazaux" rel="publisher"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style type="text/css">
+        p {
+            text-align: left;
+        }
+
+        .fragment.current-visible.visible:not(.current-fragment) {
+            display: none;
+            height: 0px;
+            line-height: 0px;
+            font-size: 0px;
+        }
+
+        .reveal h3, .reveal h4 {
+            text-transform: none;
+        }
+
+        .reveal pre code {
+            max-height: 530px;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1><img width="75" height="75" data-src="images/react.svg" alt="react"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">React</h1>
+            <h3>BBL</h3>
+            <p style="text-align: center"><a target="_blank" href="http://twitter.com/jbcazaux">@jbcazaux</a></p>
+            <p style="text-align: center"><a href="http://codox.fr/reactjs-bbl">http://codox.fr/reactjs-bbl</a>
+            </p>
+        </section>
+
+        <section><img data-src="images/mynameis.jpg" alt="my name is"></section>
+        <section>
+            <h3>Objectifs</h3>
+            <img data-src="images/postits.jpg" alt="goals">
+        </section>
+        <section>
+            <h3>Versions</h3>
+            <pre><code data-trim>
+                    "react": "16.0.0"
+                    "create-react-app": "1.0.14"
+                </code></pre>
+        </section>
+        <section>
+            <h3>Contenu</h3>
+            <ul>
+                <li>Principes</li>
+                <li>Composants</li>
+                <li>Data</li>
+                <li>Redux</li>
+                <li>Tests</li>
+                <li>Router</li>
+                <li>Optimisations</li>
+            </ul>
+        </section>
+        <section>
+            <h3>BSD <span class="fragment strike">&nbsp;+ Patent&nbsp;</span></h3>
+        </section>
+        <section>
+            <h3>Tout est composant</h3>
+            <img data-src="images/components.png" alt="components" width="90%">
+        </section>
+        <section>
+            <img data-src="images/ts.svg" alt="components" width="500px" style="border: none; background: none; box-shadow: none; margin: 0;">
+            <hr>
+            <img data-src="images/es6.png" alt="components" width="500px" style="border: none; background: none; box-shadow: none; margin: 0;"1>
+        </section>
+        <section>
+            <h3><img width="50" height="50" data-src="images/react.svg" alt="react"
+                style="border: none; background: none; box-shadow: none; margin: 0;">
+                <span class="fragment strike">&nbsp;Create react app&nbsp;</span>
+            </h3>
+            <h3><img width="50" height="50" data-src="images/webpack.png" alt="babel"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Webpack</h3>
+            <h3><img width="50" height="50" data-src="images/babel.png" alt="babel"
+                style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Babel</h3>
+            <h3><img width="50" height="50" data-src="images/jest.jpg" alt="jest"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Jest</h3>
+        </section>
+        <section>
+            <h3><img width="150" height="150" data-src="images/angular.png" alt="angular"
+                style="border: none; background: none; box-shadow: none; margin-right: 120px">
+                <img width="150" height="150" data-src="images/react.svg" alt="react"
+                     style="border: none; background: none; box-shadow: none; ">
+            </h3>
+        </section>
+
+        <section>
+            <h3>Hello world</h3>
+            <pre>hello.js<code data-trim>
+            import React from "react";
+
+            class Hello extends React.Component {
+                render() {
+                    return (
+                        <div>Hello {this.props.name} !</div>
+                    );
+                }
+            }
+            export default Hello;
+            </code></pre>
+            <pre class="fragment">index.js<code class="jsx" data-trim>
+                import React from "react";
+                import ReactDOM from "react-dom";
+                import Hello from "./Hello";
+
+                ReactDOM.render(
+                    &lt;Hello name="cnrs"/&gt;,
+                    document.getElementById('root')
+                );
+            </code></pre>
+        </section>
+        <section>
+            <h3>JSX</h3>
+            <pre><code data-trim>
+                render: function() {
+                    return (
+                      <li className="contact">
+                          <h2 className="contact-name">{this.props.name}</h2>
+                      </li>
+                    )
+                }</code></pre>
+            <pre><code data-trim>
+                render: function() {
+                    return (
+                      React.createElement('li', {className: 'contact'},
+                        React.createElement('h2',
+                            {className: 'contact-name'}, this.props.name)
+                      )
+                    )
+                }
+                </code></pre>
+        </section>
+        <section>
+            <h3>Type checking</h3>
+            <p style="font-size: 32px">On peut ne <i>rien</i> faire, utiliser <a target="_blank"
+                                                                                 href="https://www.typescriptlang.org/">Typescript</a>
+                , <a target="_blank" href="https://flow.org/">Flow</a> ou les <a target="_blank"
+                                                                                 href="https://www.npmjs.com/package/prop-types">PropTypes</a>
+            </p>
+            <pre><code data-trim>
+            class Hello extends React.Component {
+                static propTypes = {
+                    name: PropTypes.string.isRequired,
+                    truc: PropTypes.bool
+                };
+                render() {
+                    return <h1>Hello {this.props.name}!</h1>;
+                }
+            }
+            </code></pre>
+            <p style="font-size: 22px; text-align: left">
+                Au choix: array, bool, func, number, object, string, symbol, node, instanceOf(MyObject),
+                oneOf['News', 'Photos'], oneOfType([...]), arrayOf(), objectOf()...
+                <a href="https://www.npmjs.com/package/prop-types">
+                    https://www.npmjs.com/package/prop-types
+                </a>
+            </p>
+        </section>
+        <section>
+            <h3>Composant et Cycle de vie</h3>
+            <div style="font-size: 30px; text-align: left; margin-left: 50px;">
+                <p>Les incontournables :</p>
+                <ul>
+                    <li>render()</li>
+                    <li>componentWillMount()</li>
+                    <li>componentDidMount()</li>
+                    <li>componentWillUnmount()</li>
+                </ul>
+            </div>
+            <div class="fragment" style="font-size: 30px; text-align: left; margin-left: 50px">
+                <p>Les autres :</p>
+                <ul>
+                    <li>componentWillReceiveProps(<b>nextProps</b>)</li>
+                    <li>componentWillUpdate(<b>nextProps</b>, <b>nextState</b>)</li>
+                    <li>componentDidUpdate(<b>nextProps</b>, <b>nextState</b>)</li>
+                    <li>getInitialState()</li>
+                    <li>getDefaultProps()</li>
+                    <li>shouldComponentUpdate(<b>nextProps</b>, <b>nextState</b>)</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h3>Stocker des données</h3>
+            <ul>
+                <li>Props</li>
+                <li>Component's State</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Props</h3>
+            <pre><code data-trim>
+            class UserDetails extends React.Component {
+                render() {
+                    const rights = {read: true, write: false};
+
+                    return &lt;div&gt;
+                        &lt;NameDetails firstName="jb" lastName="cazaux"/&gt;
+                        &lt;AuthorisationDetails privileges={rights}/&gt;
+                    &lt;/div&gt;
+                }
+            }
+            export default UserDetails;
+            </code></pre>
+        </section>
+        <section>
+            <h3>State</h3>
+            <pre><code data-trim>
+            {
+                date: new Date(),
+                wishList: [],
+                friends: [],
+                // ...
+            }
+            </code></pre>
+        </section>
+        <section>
+            <h3>State</h3>
+            <p>Définir l'état par défaut</p>
+            <pre><code data-trim>
+            //dans le contructeur
+            this.state = {...}
+            </code></pre>
+            <p>Définir un nouvel état</p>
+            <pre><code data-trim>
+            this.setState(prevState => {...})
+            </code></pre>
+            <p>Récupérer l'état courant</p>
+            <pre><code data-trim>
+            this.state
+            </code></pre>
+        </section>
+        <section>
+            <h3>Props vs State</h3>
+
+            <p>Props</p>
+            <div style="font-size: 30px; text-align: left; margin-left: 50px;">
+                <ul>
+                    <li>Les données sont passées par les parents</li>
+                </ul>
+            </div>
+
+            <p>State</p>
+            <div style="font-size: 30px; text-align: left; margin-left: 50px;">
+                <ul>
+                    <li>Les données modifiables par les événements de la UI</li>
+                    <li>Le plus possible de composants sans état</li>
+                    <li><strike>Des données calculées</strike> (à faire dans render)</li>
+                    <li><strike>Des données dérivées des <i>props</i></strike></li>
+                    <li><strike>Des composants</strike></li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h3>Stateless component</h3>
+            <pre><code data-trim>
+                import React from "react";
+                const Hello = (props) => <h1>Hello {props.name}!</h1>;
+            </code></pre>
+            <pre class="fragment current-visible"><code data-trim>
+            class ButtonApp extends React.Component {
+                render() {
+                    return &lt;div&gt;
+                        &lt;div&gt;{this.props.title}&lt;/div&gt;
+                        &lt;button&gt;this.props.label}&lt;/button&gt;
+                    &lt;div&gt;
+                }
+            }
+            </code></pre>
+            <pre class="fragment current-visible"><code data-trim>
+            const ButtonApp = (props) =>
+                &lt;div&gt;
+                    &lt;div&gt;{props.title}&lt;/div&gt;
+                    &lt;button&gt;{props.label}&lt;/button&gt;
+                &lt;div&gt;;
+            </code></pre>
+            <pre class="fragment current-visible"><code data-trim>
+            const ButtonApp = ({title, label}) =>
+                &lt;div&gt;
+                    &lt;div&gt;{title}&lt;/div&gt;
+                    &lt;button&gt;{label}&lt;/button&gt;
+                &lt;/div&gt;;
+            </code></pre>
+        </section>
+
+
+
+
+
+
+        <div style="display: none">
+        <section>
+            <h2>EcmaScript 6</h2>
+        </section>
+        <section>
+            <h3><span style="text-decoration: line-through">var</span>, let, const</h3>
+            <pre><code data-trim>
+                let foo = 'bar';
+                const MAX = 10;
+                const ttc = addTva(15);
+                </code></pre>
+            <p class="fragment">
+                <span style="color: #8cd0d3">let</span> vs. <span style="color: #cc9393">const</span> ?
+                <span class="fragment">0 var, 44 let, 997 const</span>
+            </p>
+        </section>
+        <section>
+            <h3><span style="text-decoration: line-through">var</span>, let, const</h3>
+            <pre><code data-trim>
+                if (true) {
+                    var i = 1;
+                } else {
+                    var j = 2;
+                }
+                console.log(i, j);
+                </code></pre>
+            <pre class="fragment fade-up"><code data-trim>
+                const user = {};
+                user.name = 'john'; // (1)
+                user = {name: 'lea'}; // (2)
+                </code></pre>
+            <pre class="fragment fade-up"><code data-trim>
+                const arr = ['a'];
+                arr.push('b'); // (3)
+                arr = ['a', 'b']; // (4)
+                </code></pre>
+        </section>
+        <section>
+            <h3>Arrow functions</h3>
+            <pre><code data-trim>
+                function addOldSchool(a, b) {
+                    return a + b;
+                }
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                let add = (a, b) => {
+                    return a + b;
+                }
+                </code></pre>
+            <pre class="fragment"><code data-trim>
+                add = (a, b) => a + b
+                </code></pre>
+        </section>
+        <section>
+            <h3>Arrow functions</h3>
+            <pre><code data-trim>
+                const squares = [0, 1, 2, 3, 4].map(x => x * x);
+                console.log(squares);
+                </code></pre>
+        </section>
+        <section>
+            <h3>Attention !</h3>
+            <p><a target="_blank" href="http://www.webbrowsercompatibility.com/es6/desktop/">Pas totalement supporté par
+                les
+                navigateurs</a></p>
+            <ul>
+                <li>Shim (Array.map(), Array.reduce(), ...)</li>
+                <li>Transpiler (=>, let, const, ...)</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Spread operator</h3>
+            <pre class="fragment current-visible"><code data-trim>
+                const odd = [1, 3, 5, 7, 9];
+                const even = [2, 4, 6, 8]
+                const all = [0];
+
+                // arr.push([element1[, ...[, elementN]]])
+                all.push(odd);
+                all.push(even);
+
+                console.log(all) // ?
+                </code></pre>
+            <pre class="fragment current-visible"><code data-trim>
+                const odd = [1, 3, 5, 7, 9];
+                const even = [2, 4, 6, 8]
+                const all = [0];
+
+                // arr.push([element1[, ...[, elementN]]])
+                for (let i = 0; i < odd.length; i++) {
+                    all.push(odd[i]);
+                }
+                for (let i = 0; i < even.length; i++) {
+                    all.push(even[i]);
+                }
+                console.log(all) // ?
+                </code></pre>
+            <pre class="fragment current-visible"><code data-trim>
+                    const odd = [1, 3, 5, 7, 9];
+                    const even = [2, 4, 6, 8]
+                    const all = [0];
+
+                    // arr.push([element1[, ...[, elementN]]])
+                    all.push(...odd);
+                    all.push(...even);
+
+                    console.log(all) // ?
+                </code></pre>
+        </section>
+        <section>
+            <h3>Destructuring</h3>
+            <pre><code data-trim>
+                    const foo = {a: 1, b: 2, c: 'bar'};
+                    let {a} = foo;
+                    console.log(a); // ?
+                </code></pre>
+        </section>
+        <section>
+            <h3>Destructuring</h3>
+            <pre><code data-trim>
+                const user = {
+                    firstname: 'john',
+                    nickname: 'ninja',
+                    lastname: 'doe',
+                    age: 21
+                };
+
+                function getUserName(user) {
+                    return user.firstname.concat(' ').concat(user.lastname);
+                }
+                console.log(getUserName(user));
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                    function getUserName({firstname, lastname}) {
+                        return firstname.concat(' ').concat(lastname);
+                    }
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                    const getUserName = ({firstname, lastname}) =>
+                    firstname.concat(' ').concat(lastname);
+                </code></pre>
+        </section>
+        <section>
+            <h3>Shorthand Notation</h3>
+            <pre><code data-trim>
+                const foo = 42;
+                const bar = 1;
+
+                const longer = {
+                    foo: foo,
+                    bar: bar
+                    }
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                const shorter = {
+                    foo,
+                    bar
+                }
+                </code></pre>
+        </section>
+        <section>
+            <h3>Bonus</h3>
+            <pre><code data-trim>
+                Object.assign({}, {a: 1, c: 3}, {a: 10, b: 2}); // = ?
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                const m = new Map();
+                m.set('foo', 2);
+                const bar = m.has('foo') ? m.get('foo') : 0;
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+            const uniq = new Set([1, 2, 3, 1, 2, 3]);
+            uniq.length // ?
+            </code></pre>
+        </section>
+        <section>
+            <h3>Rappels - currying</h3>
+            <pre><code data-trim>
+                let add = function(x) {
+                    return function(y) {
+                        return x + y
+                    }
+                }
+                add(2)(3) // ???
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                const add2 = add(2);
+                add2(3); // = ?
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                let add = x => y => x + y // WTF ?!
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+                let add = x =>
+                    y => (x + y);
+                //easy !
+            </code></pre>
+        </section>
+        <section>
+            <h3>Rappels - this</h3>
+            <pre><code data-trim data-noescape>
+                function f() {
+                    this.foo; // what is this ?
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h1>
+                <img width="200" height="200" data-src="images/react.svg" alt="react"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">
+            </h1>
+        </section>
+          <section>
+            <h3>Create or extends</h3>
+            <pre><code data-trim>
+            const Hello = React.createClass({
+                render: function() {
+                    return (
+                        <h1>Hello {this.props.name}!</h1>
+                    );
+                }
+            });
+            </code></pre>
+            <pre><code data-trim>
+            class Hello extends React.Component {
+                render() {
+                    return (
+                        <h1>Hello {this.props.name}!</h1>
+                    );
+                }
+            }
+            </code></pre>
+        </section>
+        <section data-background="#b5533c">
+            <h3>TP-01</h3>
+            <h4>Hello World</h4>
+            <ol>
+                <li>Etendre la classe React.Component</li>
+                <li>Implémenter la méthode render()</li>
+            </ol>
+        </section>
+        </div>
+
+
+
+
+
+
+        <section>
+            <h3>Trucs et astuces</h3>
+            <h4 class="fragment">(Workarounds)</h4>
+        </section>
+        <section>
+            <h3>Itérer sur un tableau</h3>
+            <pre><code data-trim>
+            render() {
+                return &lt;ul&gt;
+                {
+                    this.state.items.map(item =>
+                        &lt;li key={item.id}&gt;{item.label}&lt;/li&gt;)
+                }
+                &lt;/ul&gt;
+            }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Caractères spéciaux</h3>
+            <pre><code data-trim>
+                <span> Jet d{String.fromCharCode(39)}eau</span>
+                </code></pre>
+        </section>
+        <section>
+            <h3>JSX if (else)</h3>
+            <p>if</p>
+            <pre><code data-trim>
+                {this.state.user && <div>{this.state.user.login}</div>}
+            </code></pre>
+            <p>not</p>
+            <pre><code data-trim>
+                {this.state.user || <div>No User</div>}
+            </code></pre>
+            <p>if-else</p>
+            <pre><code data-trim>
+                {this.state.user
+                    ? <div>{this.state.user.login}</div>
+                    : <div>No User</div>}
+            </code></pre>
+        </section>
+        <section>
+            <h3>Commentaires</h3>
+            <pre><code data-trim>
+            render() {
+                return &lt;div&gt;
+                    {/* Sans commentaire ;) */}
+                &lt;div&gt;
+            }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Passer des fonctions dans Props</h3>
+            <pre><code data-trim>
+            class App extends React.Component {
+                deleteItem(itemId) {
+                    const newItems = this.state.items
+                        .filter(i => i.id !== itemId);
+                    this.setState(items: newItems);
+                }
+                render() {
+                    return &lt;TodoList
+                            title={this.props.title}
+                            items={this.state.items}
+                            del={this.deleteItem}/&gt;
+                    }
+                }
+            }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Recevoir des fonctions dans Props</h3>
+            <pre><code data-trim>
+            const TodoList = ({title, items, del}) => (
+                &lt;div&gt;
+                    &lt;h2&gt;{title}&lt;/h2&gt;
+                    &lt;ul&gt;
+                        {
+                          items.map(item => &lt;li key={item.id}
+                                onClick={() => del(item.id)}&gt;
+                            {item.label}&lt;/li&gt;)
+                        }
+                    &lt;/ul&gt;
+                &lt;/div&gt;);
+            </code></pre>
+        </section>
+        <section>
+            <h3>Avec du style</h3>
+        </section>
+        <section>
+            <h3>inline style vs css</h3>
+            <p>Pourquoi pas du inline ?</p>
+
+            <pre><code data-trim>
+            render() {
+                const mystyle = {backgroundColor: '#F0ABCD'};
+                return &lt;div style={mystyle}/&gt;
+            }
+            </code></pre>
+            <p>Sinon une CSS globale, ou une CSS par composant (Webpack powered)</p>
+
+            <pre><code data-trim>
+                import './MyComponent.css';
+                </code></pre>
+        </section>
+        <section>
+
+            <h3>React-bootstrap</h3>
+
+            <div style="font-size: 30px; text-align: left; margin-left: 50px;">
+                <p>Adaptation des composants bootstrap à React</p>
+            </div>
+            <pre><code data-trim>
+                &lt;Button bsStyle="primary"
+                        onClick={this.handleClick.bind(this)}&gt;Go!&lt;/Button&gt;
+            </code></pre>
+
+            <div style="font-size: 30px; text-align: left; margin-left: 50px;">
+                <p>La documentation</p>
+                <ul>
+                    <li>
+                        <a target="_blank" href="https://react-bootstrap.github.io/components.html">https://react-bootstrap.github.io/components.html</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://getbootstrap.com/components/">http://getbootstrap.com/components/</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h3>Rappels</h3>
+            <ul>
+                <li>Un composant a des propriétés et des états</li>
+                <li>Un composant stateless est plus maintenable et testable</li>
+                <li>On ne peut passer des propriétés qu'aux enfants</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Comment partager les données ?</h3>
+            <img data-src="images/components.png" alt="components" width="90%">
+        </section>
+        <section>
+            <h3>Bad Practice vs. Good Practice</h3>
+            <img data-src="images/flux-bestpractice.png" alt="best practices" height="300">
+            <div style="font-size: 30px; text-align: left; margin-left: 15px;">
+                <ul>
+                    <li>On ne met pas à jour directement les autres composants</li>
+                    <li>On passe par le store (redux), les stores (flux), les services (Subject RxJs), ...</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h3>(Flux &) Redux</h3>
+        </section>
+        <section>
+            <h3>Actions</h3>
+            <pre><code data-trim>
+                {type: 'INCREMENT', inc: 3}
+                {type: 'ADD_TODO', text: 'Acheter du pain'}
+                {type: 'SET_USER', user: new User(1, 'toto')}
+            </code></pre>
+
+            <h3>Action Creator</h3>
+            <pre><code data-trim>
+            export const incrementor = (inc) => {
+                return {type: 'INCREMENT', inc};
+            };
+            </code></pre>
+        </section>
+        <section>
+            <h3>Redux</h3>
+            <div style="font-size: 30px; text-align: left; margin-left: 15px;">
+                <ul>
+                    <li>Un store unique (pratique pour l'isomorphisme)</li>
+                    <li>L'état du store est read-only</li>
+                    <li>On émet des <b>actions</b> pour modifier l'état</li>
+                    <li class="fragment">Les <b>actions</b> sont interprétées par des <b>reducers</b></li>
+                    <li class="fragment">les <b>reducers</b> sont des fonctions <b>pures</b></li>
+                    <li class="fragment">les <b>reducers</b> prennent en entrée l'état précédent et une action</li>
+                    <li class="fragment">ils retournent le nouvel état dans un objet immutable</li>
+                </ul>
+            </div>
+            <img data-src="images/redux.png" alt="redux" height="200">
+        </section>
+        <section>
+            <h3>Reducer</h3>
+            <pre><code data-trim>
+            export const counterReducer = (state = 0, action) => {
+                switch (action.type) {
+                    case 'INCREMENT':
+                        return state + action.inc;
+                    case 'DECREMENT':
+                        return state - action.inc;
+                    default:
+                        return state;
+                }
+            };
+            </code></pre>
+            Le <b>state</b> (du <b>store</b>) est en read-only !
+            <img data-src="images/redux.png" alt="redux">
+        </section>
+        <section>
+            <h3>Présentation et Conteneur</h3>
+            <ul>
+                <li>Les composants stateless sont simples à maintenir</li>
+                <li>Séparation des responsabilités</li>
+            </ul>
+
+            <img data-src="images/conteneur-pres.png" alt="conteneur-presentation">
+
+        </section>
+        <section>
+
+            <h3>Présentation et Conteneur</h3>
+
+            <p style="font-size: 28px"> On découpe nos composants (connectés au <i>store</i>) en 2, <i>présentation</i> & <i>conteneur</i></p>
+
+            <table style="font-size: 28px">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Presentational Components</th>
+                    <th>Container Components</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Purpose</td>
+                    <td>How things look (markup, styles)</td>
+                    <td>How things work (data fetching, state updates)</td>
+                </tr>
+                <tr>
+                    <td>Aware of Redux</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>To read data</td>
+                    <td>Read data from props</td>
+                    <td>Subscribe to Redux state</td>
+                </tr>
+                <tr>
+                    <td>To change data</td>
+                    <td>Invoke callbacks from props</td>
+                    <td>Dispatch Redux actions</td>
+                </tr>
+                <tr>
+                    <td>Are written</td>
+                    <td>By hand</td>
+                    <td>Usually generated by React Redux</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h3>Composant de présentation:</h3>
+            <pre><code data-trim>
+                export const SelectCodePostal_ =
+                    ({cps, currentCp, onSelectCp}) => (
+                &lt;select onChange={onSelectCp} value={currentCp}&gt;
+                {
+                    cps.map(cp =>
+                        &lt;option key={cp} value={cp}&gt;{cp}&lt;/option&gt; )
+                }
+                &lt;/select&gt;
+                );
+                </code></pre>
+        </section>
+        <section>
+            <h3>Conteneur</h3>
+            <pre><code data-trim data-noescape>
+            const <mark>mapStateToProps</mark> = (state) => {
+                const cpsOfAgence = state.codesPostaux.map(cp => cp.id);
+                return {cps: cpsOfAgence, currentCp: state.codePostal.id};
+            };
+
+            const <mark>mapDispatchToProps</mark> = (dispatch) => {
+                return {
+                    onSelectCp: (event) => {
+                    const cpId =
+                        new CodePostalId(parseInt(event.target.value));
+                    dispatch({type: 'SET_CODE_POSTALID', cpId: cpId});
+                    }
+                };
+            };
+            export const SelectCodePostal =
+                <mark>connect</mark>(mapStateToProps, mapDispatchToProps)(SelectCodePostal_);
+            </code></pre>
+        </section>
+        <section>
+            <h3>Actions asynchrones</h3>
+            <ul>
+                <li> Redux ne permet que de dispatcher des objets</li>
+                <li class="fragment"><b>redux-thunk</b> ou <b>redux-saga</b> permettent de lancer une fonction, et donc
+                    des actions asynchrones ou des actions avec conditions. Ce sont des <i>middlewares</i>.
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>Redux Thunk</h3>
+            <p>Une <i>ThunkAction</i> est une fonction qui reçoit en entrée les méthodes <i>dispatch()</i> et
+                <i>getState()</i>, et retourne le résultat de <i>dispatch()</i></p>
+        </section>
+        <section>
+            <h3>Redux Thunk</h3>
+            <pre><code data-trim>
+            function incrementCreator(inc) {
+                return {
+                    type: 'INCREMENT_COUNTER',
+                    inc: inc
+                };
+            }
+            </code></pre>
+            <pre><code data-trim>
+            function incrementAsyncCreator(inc) {
+              return dispatch =>
+                 setTimeout(() => dispatch(incrementCreator(inc)),1000);
+            }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Redux-Sagas</h3>
+            <pre><code data-trim>
+            export function* loadItems() {
+                const items = yield call(fetch, '/items');
+                yield put({type: 'SET_ITEMS', items: items});
+            }
+            </code></pre>
+            <pre><code data-trim>
+                export function* loadCharts(action) {
+                    const user = yield call(fetch, '/user/' + action.userId);
+                    if (user.isPremium()) {
+                        const data = yield call(fetchPremiumChartsData);
+                        yield put({type: 'SET_CHARTS_DATA', data: data});
+                    }
+                    else {
+                        const data = yield call(fetchBasicChartsData);
+                        yield put({type: 'SET_CHARTS_DATA', data});
+                    }
+                }
+
+            </code></pre>
+        </section>
+        <section>
+            <h3>Bravo !</h3>
+            <p>C'est la partie la plus compliquée</p>
+            <p>On sait créer des composants et leurs passer des propriétés</p>
+            <ul>
+                <li>Depuis leur composant parent</li>
+                <li>Depuis l'état 'local' (<i>LocalState</i>)</li>
+                <li>Depuis l'état du <b>store</b> (<i>State</i>)</li>
+                <li>Depuis un composant grand(n)-parent par le context...</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Context</h3>
+            <ul>
+                <li>On peut passer des objets à ses composants enfants (n'importe où dans la hiérarchie).</li>
+                <li class="fragment">Des librairies sont basées la dessus, mais ce n'est pas officiellement supporté (le fonctionnement pourra
+                    varier, être supprimé).</li>
+                <li class="fragment">La doc parle d'<b>experimental API</b> !</li>
+                <li class="fragment"><i>react-redux</i> fonctionne grâce à ça (le store est passé à tous les enfants).</li>
+                <li class="fragment"><mark>A n'utiliser qu'en cas d'urgence !</mark></li>
+            </ul>
+        </section>
+        <section>
+            <h3>Tests</h3>
+        </section>
+        <section>
+            <h3>Jest & Enzyme</h3>
+            <p>L'idée est de tester les composants de <i>présentation</i>, avec leurs états et leurs propriétés.</p>
+
+            <pre><code data-trim>
+            import React from "react";
+            import {shallow} from "enzyme";
+
+            describe(MyComponent, () => {
+                it('should work !', () => {
+                    const component = shallow(<MyComponent/>);
+                });
+            });
+            </code></pre>
+            <p><a href="https://facebook.github.io/jest/docs/api.html#content" target="_blank">Jest API</a></p>
+            <p><a href="https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md" target="_blank">Enzyme API</a></p>
+        </section>
+        <section>
+            <h3>Présence de sous-composants</h3>
+            <pre><code data-trim>
+            describe(MyComponent, () => {
+                it('renders MyComponent and its sub components', () => {
+                    const component = shallow(
+                    &lt;MyComponent/&gt;
+                );
+                expect(component.find(SubComponent1).exists())
+                    .toBeTruthy();
+                expect(component.find(SubComponent2).exists())
+                    .toBeTruthy();
+                });
+            });
+            </code></pre>
+        </section>
+        <section>
+            <h3>Texte affiché</h3>
+            <pre><code data-trim>
+            expect(component.text()).toContain('mon texte attendu');
+            </code></pre>
+        </section>
+        <section>
+            <h3>Vérifier qu'une méthode a été appelée</h3>
+            <pre><code data-trim>
+            const mockOnChange = jest.fn();
+            expect(mockOnChange).toBeCalledWith(myParam);
+            </code></pre>
+        </section>
+        <section>
+            <h3>Simulation</h3>
+            <pre><code data-trim>
+            component.find('button')
+                .at(1)
+                .simulate('click');
+            component.find('input')
+                .simulate('change', {target: {value: 'ma valeur'}});
+            </code></pre>
+        </section>
+        <section>
+            <h3>Appeler une méthode</h3>
+            <pre><code data-trim>
+            component.instance().maMethode();
+            </code></pre>
+        </section>
+        <section>
+            <h3>Récupérer l'état</h3>
+            <pre><code data-trim>
+                expect(component.state('name')).toEqual('mon nom');
+                </code></pre>
+        </section>
+        <section>
+            <h3>Tests des sagas</h3>
+
+            <p>L'idée est de tester unitairement les sagas, pas les méthodes appelées.</p>
+            <ul>
+                <li>Les embranchements conditionnels</li>
+                <li>Les appels à put, call, fork, ...</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Tests des sagas</h3>
+            <pre><code data-trim>
+            function* loadUser(action) {
+               const user = yield call(fetch, '/users/' + action.userId);
+               yield put({type: 'SET_USER', user});
+            }
+            </code></pre>
+            <pre><code data-trim>
+            it('load user', () => {
+               const gen = loadUser({userId: 42});
+
+               expect(gen.next().value).toEqual(call(fetch, '/users/42'));
+               const user = {id: 42, name: 'joe'};
+               expect(gen.next(user).value)
+                .toEqual(put({type: 'SET_USER', user: user}));
+               expect(gen.next().done).toBeTruthy();
+            });
+            </code></pre>
+        </section>
+        <section>
+            <h3>Router</h3>
+        </section>
+        <section>
+            <h3>react-router</h3>
+
+            <p>Il existe plusieurs systèmes de gestion de l'historique de navigation :</p>
+            <ul>
+                <li><b>BrowserRouter</b> : /monsite/page1/partie2</li>
+                <li><b>HashRouter</b>: /monsite/#/page1/partie2</li>
+                <li><b>MemoryRouter</b> : /</li>
+            </ul>
+            <p style="font-size: 24px">Pour le BrowserRouter il faut modifier le serveur pour rediriger toutes les requêtes vers index.html, sauf
+                les css, js, et appels aux webservices.</p>
+        </section>
+        <section>
+            <h3>react-router</h3>
+
+            <p>Définir le Router au plus haut niveau dans l'application.</p>
+            <pre><code data-trim>
+            import
+                {BrowserRouter as Router,
+                Route,
+                Link} from 'react-router-dom';
+
+            ReactDOM.render(
+            &lt;Router&gt;
+                &lt;Route exact path="/" component={Home} /&gt;
+                &lt;Route path="/about" component={About} /&gt;
+                &lt;Route path="/admin" component={Admin} /&gt;
+            &lt;/Router&gt;,
+            document.getElementById('root')
+            );
+            </code></pre>
+        </section>
+        <section>
+            <p>On peut imbriquer les routes !</p>
+            <pre><code data-trim>
+            const Admin = () => (
+            &lt;div&gt;
+              &lt;h2&gt;Administration&lt;/h2&gt;
+              &lt;Route path={'/admin/users'} component={UsersAdmin}/&gt;
+              &lt;Route path={'/admin/articles'} component={ArticlesAdmin}/&gt;
+            &lt;/div&gt;
+            )
+            </code></pre>
+        </section>
+        <section>
+            <h3>react-router</h3>
+            <p>On peut générer des liens automatiquement (voir la doc pour les propriétés)</p>
+            <pre><code data-trim>
+                &lt;Link to="/admin/users"&gt;Administration des utilisateurs&lt;/Link&gt;
+            </code></pre>
+        </section>
+        <section>
+            <h3>react-router</h3>
+            <p>Urls dynamiques</p>
+            <pre><code data-trim>
+            &lt;Route path={'/admin/users/:userId'} component={UserAdmin}/&gt;
+            </code></pre>
+            <pre><code data-trim>
+            const UserAdmin = ({match}) => (
+            &lt;div&gt;
+                Gérer l'utilisateur {match.params.userId}
+            &lt;/div&gt;
+            )
+            </code></pre>
+        </section>
+        <section>
+            <h3>Optimisations</h3>
+        </section>
+        <section>
+            <h3>Reconciliation</h3>
+
+            <p>Le <b>Virtual DOM</b> est... <span  class="fragment" style="font-size: 24px">une réprésentation des composants en mémoire. Quand les propriétés d'un composant
+            changent, le nouveau virtual DOM est comparé à l'ancien. Si il y a une différence, le 'vrai' DOM est modifié.
+            Si on sait que le composant n'a pas besoin d'être redessiné, on peut surcharger <i>shouldComponentUpdate</i></span></p>          <pre><code data-trim>
+            shouldComponentUpdate(nextProps, nextState) {
+                return true;
+            }
+            </code></pre>
+        </section>
+        <section>
+            <h3>On ne redessine que le nécessaire</h3>
+            shouldComponentUpdate & Virtual-DOM
+            <img data-src="images/should-component-update.png" alt="update">
+        </section>
+        <section>
+            <h3>Memoization</h3>
+
+            <p>Permet d'éviter le recalcul d'une propriété dérivée de l'état du store redux. Par exemple le tri d'une
+                liste, le caclcul du prix total d'un panier, ... </p>
+        </section>
+        <section>
+            <h3>Let's do it !</h3>
+
+            <h3>help ? <a href="mailto:jbcazaux@gmail.com">jbcazaux@gmail.com</a></h3>
+            <h3><a href="http://codox.fr/formation-reactjs-es6">http://codox.fr/formation-reactjs-es6</a></h3>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
