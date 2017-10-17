@@ -354,6 +354,20 @@
             </code></pre>
         </section>
         <section>
+            <h3>if (else)</h3>
+            <pre><code data-trim>
+            class UserDetails extends React.Component {
+                render() {
+                    if (this.state.user) {
+                        return &lt;div&gt;{this.state.user.login}&lt;/div&gt;;
+                    } else {
+                        return &lt;div&gt;No User&lt;/div&gt;;
+                    }
+                }
+            }
+            </code></pre>
+        </section>
+        <section>
             <h3>Commentaires</h3>
             <pre><code data-trim>
             render() {
