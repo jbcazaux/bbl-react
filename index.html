@@ -9,26 +9,25 @@
             content="formation react, formation reactjs, freelance, flux, redux, es6, props, state, jsx"
     />
     <link rel="canonical" href="http://codox.fr/formation-reactjs-es6" />
-    <title>Formation react js ES6</title>
+    <title>BBL ReactJs</title>
     <link href="https://google.com/+JeanBaptisteCazaux" rel="publisher" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" href="reveal/css/reveal.css" />
-    <link rel="stylesheet" href="reveal/css/theme/black.css" />
+    <link rel="stylesheet" href="reveal/css/reset.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="reveal/css/theme/black.css">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="reveal/lib/css/zenburn.css" />
+    <link rel="stylesheet" href="reveal/lib/css/monokai.css">
 
     <!-- Printing and PDF exports -->
     <script>
-        var link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.type = 'text/css'
-        link.href = window.location.search.match(/print-pdf/gi)
-            ? 'reveal/css/print/pdf.css'
-            : 'reveal/css/print/paper.css'
-        document.getElementsByTagName('head')[0].appendChild(link)
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
     <style type="text/css">
         p {
@@ -98,33 +97,26 @@
             <img data-src="images/es6.png" alt="components" width="500px" style="border: none; background: none; box-shadow: none; margin: 0;"1>
         </section>
         <section>
-            <h3><img width="50" height="50" data-src="images/react.svg" alt="react"
-                style="border: none; background: none; box-shadow: none; margin: 0;">
-                Create react app&nbsp;
-            </h3>
-            <h3><img width="50" height="50" data-src="images/webpack.png" alt="babel"
-                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Webpack</h3>
-            <h3><img width="50" height="50" data-src="images/babel.png" alt="babel"
-                style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Babel</h3>
-            <h3><img width="50" height="50" data-src="images/jest.jpg" alt="jest"
-                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Jest</h3>
-        </section>
-        <section>
             <h3><img width="150" height="150" data-src="images/angular.png" alt="angular"
                 style="border: none; background: none; box-shadow: none; margin-right: 120px">
                 <img width="150" height="150" data-src="images/react.svg" alt="react"
                      style="border: none; background: none; box-shadow: none; ">
             </h3>
+            <p>Framework vs. Library (http, routing, tests, build, ...)</p>
+            <p>Templating html</p>
+            <p>Composants, Service, Modules, Pipe, Directive, ... en Angular seulement</p>
         </section>
         <section>
             <h3>(props, state) => UI</h3>
         </section>
         <section>
             <h3>Hello world</h3>
-            <pre>Hello.js<code data-trim>
+            <pre>Hello.js<code class="hljs" data-trim>
             import React from "react";
 
-            const Hello  = (props) => &lt;div&gt; Hello {props.name} ! &lt;/div&gt;
+            const Hello  = (props) => {
+                return <div> Hello {props.name} ! </div>
+            }
 
             export default Hello;
             </code></pre>
@@ -178,6 +170,21 @@
                     https://reactjs.org/docs/typechecking-with-proptypes.html
                 </a>
             </p>
+        </section>
+        <section>
+            <h3>Comment démarrer ?</h3>
+        </section>
+        <section>
+            <h3><img width="50" height="50" data-src="images/webpack.png" alt="babel"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Webpack</h3>
+            <h3><img width="50" height="50" data-src="images/babel.png" alt="babel"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Babel</h3>
+            <h3><img width="50" height="50" data-src="images/jest.jpg" alt="jest"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">&nbsp;Jest</h3>
+            <h3 class="fragment current-visible"><img width="50" height="50" data-src="images/react.svg" alt="react"
+                     style="border: none; background: none; box-shadow: none; margin: 0;">
+                Create react app&nbsp;
+            </h3>
         </section>
         <section>
             <h3>Stocker des données</h3>
@@ -437,7 +444,7 @@
         </section>
         <section>
             <h3>Jest, Enzyme, React Test Renderer, React Testing Library, ...</h3>
-            <p>L'idées est de tester les <i>composants</i>, avec leurs états et leurs props.</p>
+            <p>L'idées est de tester les <i>composants</i>, avec leurs données.</p>
             <p>L'arrivée des hooks a fait bouger la hiérarchie des outils de test.</p>
             <ul>
                 <li>Enzyme: les Hooks ne sont pas encore totalement supportés</li>
@@ -518,6 +525,7 @@
             <h3>Vérifier qu'une méthode a été appelée</h3>
             <pre><code data-trim>
             const mockFunction = jest.fn()
+            ...
             expect(mockFunction).toBeCalledWith(42)
           </code></pre>
         </section>
@@ -526,11 +534,13 @@
             <pre><code data-trim>
           import {render, fireEvent } from '@testing-library/react'
 
-          it('fire events', () => {
+          it('fires events', () => {
             const {container} = render(&lt;NiceInput /&gt;)
             const input = container.querySelector('input')
 
             fireEvent.change(input, {target: {value: 'new text'}})
+
+            // expect(...)
           })
           </code></pre>
         </section>
@@ -591,8 +601,8 @@
         <section>
             <h3>Memoization</h3>
 
-            <p>Permet d'éviter le recalcul, par exemple le tri d'une liste, le caclcul du prix total d'un panier, ou bien
-            encore le rendu d'un composant UI (React)</p>
+            <p>Permet d'éviter le recalcul, par exemple le tri d'une liste, le calcul du prix total d'un panier, ou bien
+            encore le rendu d'un composant UI (React).</p>
         </section>
         <section>
             <h3>Let's do it !</h3>
@@ -603,8 +613,6 @@
     </div>
 </div>
 
-
-<script src="reveal/lib/js/head.min.js"></script>
 <script src="reveal/js/reveal.js"></script>
 
 <script>
@@ -614,15 +622,9 @@
             { src: 'reveal/plugin/markdown/marked.js' },
             { src: 'reveal/plugin/markdown/markdown.js' },
             { src: 'reveal/plugin/notes/notes.js', async: true },
-            {
-                src: 'reveal/plugin/highlight/highlight.js',
-                async: true,
-                callback: function() {
-                    hljs.initHighlightingOnLoad()
-                },
-            },
-        ],
-    })
+            { src: 'reveal/plugin/highlight/highlight.js', async: true }
+        ]
+    });
 </script>
 </body>
 </html>
