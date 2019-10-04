@@ -274,7 +274,7 @@
             <p>if-else</p>
             <pre><code data-trim>
             const UserDetails = (props) => (<div>
-                {this.state.user
+                {props.user
                     ? <div>{props.user.login}</div>
                     : <div>No User</div>}
             </div>)
@@ -285,7 +285,7 @@
             <pre><code data-trim>
             const UserDetails = (props) => {
                     if (props.user) {
-                        return &lt;div&gt;{this.state.user.login}&lt;/div&gt;;
+                        return &lt;div&gt;{props.user.login}&lt;/div&gt;;
                     } else {
                         return &lt;div&gt;No User&lt;/div&gt;;
                     }
